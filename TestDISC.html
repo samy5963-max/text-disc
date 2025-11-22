@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test DISC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-8">
+    
+    <!-- 🔧 CONFIGURA AQUÍ TU URL DE GOOGLE SHEETS -->
+    <script>
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEmB0SURffeEz7Hl2R_sNSsaXa3ANs6-CW67pF_1Rv6QIts4--aenQmL2dmpIG47aGWg/exec';
+    </script>
+
+    <div id="app" class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8">
+        <!-- El contenido se cargará aquí con JavaScript -->
+    </div>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                text: "Estoy esperando mesa en un restaurante, me dicen que faltan 10 minutos y pasan 20:",
+                options: {
+                    A: "Me molesto y le digo al mesero que ya pasó el doble de tiempo y le digo que si tardará mucho más me iré.",
+                    B: "No me doy cuenta, pues estoy metidísimo en la plática.",
+                    C: "No me fijo o aunque me de cuenta, no digo nada.",
+                    D: "Le digo al mesero exactamente la hora en que llegué y exactamente el tiempo que ha pasado, le pido que por favor me diga con exactitud cuánto tiempo más falta para poder tomar una decisión."
+                }
+            },
+            {
+                id: 2,
+                text: "Tengo mucha hambre y prisa. El mesero me trae un platillo que no pedí:",
+                options: {
+                    A: "Me molesto y le digo impositivamente si no estaba poniendo atención cuando ordené.",
+                    B: "Cotorreo con el mesero para explicarle que no es lo que pedí.",
+                    C: "Me quedo callado y me adapto a lo que me trajeron.",
+                    D: "Le digo de manera directa que eso no fue lo que pedí."
+                }
+            },
+            {
+                id: 3,
+                text: "En una reunión de amigos:",
+                options: {
+                    A: "Me gusta convencer a los demás de mis opiniones y gozo de hablar de cosas relacionadas con mi trabajo.",
+                    B: "Platico mucho o cuento chistes, hablo más de lo que escribo.",
+                    C: "Me quedo escuchando, la gente me busca porque soy excelente escucha pues pongo atención.",
+                    D: "Observo y analizo a la gente, si doy mi opinión, lo hago únicamente si conozco del tema y será algo preciso."
+                }
+            },
+            {
+                id: 4,
+                text: "Mis compañeros de trabajo me describirían como alguien:",
+                options: {
+                    A: "Enérgico, fuerte y agresivo.",
+                    B: "Social, alegre, platicador.",
+                    C: "Tranquilo, paciente y amable.",
+                    D: "Concreto, disciplinado y metódico."
+                }
+            },
+            {
+                id: 5,
+                text: "En una discusión:",
+                options: {
+                    A: "Busco tener la razón y no paro hasta conseguirla. Además me gusta discutir.",
+                    B: "Trato de decirles que no es para tanto, pues discutir me da flojera.",
+                    C: "Odio la agresión y mejor digo que sí, estoy de acuerdo, con tal de no argumentar.",
+                    D: "Me baso en los hechos y busco comprobar mi punto de vista, para que esté bien fundamentado, y espero lo mismo de los demás."
+                }
+            },
+            {
+                id: 6,
+                text: "Lo que realmente me emociona en la vida:",
+                options: {
+                    A: "Los retos, la novedad, arriesgar.",
+                    B: "Las sorpresas, la diversión, el juego.",
+                    C: "La dulzura, el cariño, aceptación.",
+                    D: "Aprender, sabiduría, el conocimiento."
+                }
+            },
+            {
+                id: 7,
+                text: "Si alguien me agrede:",
+                options: {
+                    A: "Agredo de regreso pues necesito sacar mi enojo de inmediato, lo bueno es que así como se sube de rápido, así también se me baja.",
+                    B: "Evado la situación o lo tiro de a loco.",
+                    C: "Me quedo callado y no demuestro lo que siento.",
+                    D: "Me angustio, me privo y me lo guardo. A la larga exploto y cuando esto pasa, cuidado, pues no se me baja nada fácil."
+                }
+            },
+            {
+                id: 8,
+                text: "Cuando voy de compras:",
+                options: {
+                    A: "Busco buenas ofertas, me encantan los descuentos.",
+                    B: "Me divierte ir de compras y me encanta comprar regalos, dicen que soy un comprador compulsivo.",
+                    C: "Soy indeciso, me cuesta mucho trabajo decidir y escoger.",
+                    D: "Sé lo que quiero y no gasto mi dinero si no lo encuentro; soy muy definido."
+                }
+            },
+            {
+                id: 9,
+                text: "¿Qué frase te describe mejor?",
+                options: {
+                    A: "Soy activo y energético, me gusta hacer más de una cosa a la vez, la gente me pregunta si nunca me canso.",
+                    B: "Soy alegre y jovial, si veo a alguien triste busco ponerlo de buen humor, la gente me pregunta si nunca me deprimo.",
+                    C: "Soy tranquilo y pasivo, me gusta que la gente se lleve bien y que no haya agresión, la gente me pregunta si nunca me enojo.",
+                    D: "Soy analítico y observador, me gusta resolver problemas mentales y encontrar la solución, la gente me dice que soy muy responsable y aprensivo."
+                }
+            },
+            {
+                id: 10,
+                text: "Cuando estoy trabajando en equipo soy:",
+                options: {
+                    A: "El que manda y organiza.",
+                    B: "El que anima para que todos le echen ganas.",
+                    C: "El que apoya para lograr un equipo unido.",
+                    D: "El que organiza la parte estratégica para lograr la mayor posibilidad de éxito."
+                }
+            },
+            {
+                id: 11,
+                text: "Mis hermanos y la gente que me rodea, dicen que mis peores defectos son:",
+                options: {
+                    A: "Ser agresivo y visceral.",
+                    B: "Ser distraído y desorganizado.",
+                    C: "Ser pasivo y lento.",
+                    D: "Ser terco y cuadrado."
+                }
+            },
+            {
+                id: 12,
+                text: "Algunas de mis cualidades son:",
+                options: {
+                    A: "Ser determinado y seguro.",
+                    B: "Ser optimista y alegre.",
+                    C: "Ser adaptado y pacífico.",
+                    D: "Ser cumplido y estable."
+                }
+            },
+            {
+                id: 13,
+                text: "Estoy caminando, me tropiezo con algún desconocido:",
+                options: {
+                    A: "Espero a que se quite de mi camino para seguir adelante.",
+                    B: "Le sonrío y me sigo de frente.",
+                    C: "Le pido perdón y me sigo de frente.",
+                    D: "Me hago a un lado y sin hablar sigo mi camino."
+                }
+            },
+            {
+                id: 14,
+                text: "En el trabajo, sobresalgo en:",
+                options: {
+                    A: "La toma de decisiones rápidas.",
+                    B: "Las relaciones públicas.",
+                    C: "La capacidad para adaptarme en equipos.",
+                    D: "La seguridad de tener calidad y puntualidad."
+                }
+            },
+            {
+                id: 15,
+                text: "Mis defectos en el trabajo son:",
+                options: {
+                    A: "No me gusta que me digan qué hacer.",
+                    B: "Desordenado y olvidadizo, a veces impuntual.",
+                    C: "Trabajo mal bajo presión.",
+                    D: "No me gusta delegar, prefiero trabajar solo."
+                }
+            },
+            {
+                id: 16,
+                text: "Mi madre dice que de chico yo era:",
+                options: {
+                    A: "Mandón y exigente.",
+                    B: "Alegre y platicaba con todo el mundo.",
+                    C: "Obediente y tranquilo.",
+                    D: "Bien hecho y no me gustaba ensuciarme."
+                }
+            },
+            {
+                id: 17,
+                text: "Al expresarme:",
+                options: {
+                    A: "Digo las cosas como son.",
+                    B: "Las digo de manera indirecta para no lastimar.",
+                    C: "Casi no expreso lo que siento.",
+                    D: "Digo las cosas de manera diplomática."
+                }
+            },
+            {
+                id: 18,
+                text: "La emoción que demuestro con más frecuencia es:",
+                options: {
+                    A: "Enojo.",
+                    B: "Optimismo.",
+                    C: "No demuestro emoción.",
+                    D: "Miedo."
+                }
+            },
+            {
+                id: 19,
+                text: "Las maestras me reconocían porque:",
+                options: {
+                    A: "Discutía mucho y me encantaba demostrar que todo lo sabía.",
+                    B: "Era muy amiguero y hablaba mucho.",
+                    C: "No interrumpía y era callado.",
+                    D: "Buen estudiante y muy analítico."
+                }
+            },
+            {
+                id: 20,
+                text: "Características que más te describen:",
+                options: {
+                    A: "Autosuficiente y ambicioso.",
+                    B: "Despreocupado y popular.",
+                    C: "Cooperativo y adaptable.",
+                    D: "Preciso y exacto."
+                }
+            },
+            {
+                id: 21,
+                text: "Características que más te describen:",
+                options: {
+                    A: "Valiente y osado.",
+                    B: "Amiguero y platicador.",
+                    C: "Tolerante y flexible.",
+                    D: "Reservado y respetuoso."
+                }
+            },
+            {
+                id: 22,
+                text: "Características que más te describen:",
+                options: {
+                    A: "Obstinado, determinación para defenderme.",
+                    B: "Confianzudo, creo en los demás.",
+                    C: "Servicial, me gusta ayudar a los demás.",
+                    D: "Prudente, me gusta reflexionar bien las cosas."
+                }
+            },
+            {
+                id: 23,
+                text: "Características que más te describen:",
+                options: {
+                    A: "Emprendedor, fuerza de voluntad.",
+                    B: "Juguetón, atrae gente.",
+                    C: "Generoso, me adapto a los demás.",
+                    D: "Cuidadoso, tacto al decir las cosas."
+                }
+            },
+            {
+                id: 24,
+                text: "Características que más te describen:",
+                options: {
+                    A: "Atrevido, creo en mí.",
+                    B: "Cálido, motivo a los demás.",
+                    C: "Calmado, hago lo que me piden.",
+                    D: "Pulcro, ordenado y limpio."
+                }
+            },
+            {
+                id: 25,
+                text: "Características que más te describen:",
+                options: {
+                    A: "Confrontador, gusta argumentar.",
+                    B: "Animado, alma de la fiesta.",
+                    C: "Armonioso, abierto a sugerencias.",
+                    D: "Culto, busco tener conocimiento."
+                }
+            },
+            {
+                id: 26,
+                text: "Características que más te describen:",
+                options: {
+                    A: "Toma acción, persuasivo, convincente.",
+                    B: "Carismático, magnético, desinhibido.",
+                    C: "Humilde, compasivo con la gente.",
+                    D: "Sistemático, escéptico, precavido."
+                }
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = {};
+        let personalInfo = { name: '', position: '', department: '' };
+        let currentStep = 'personal';
+
+        function renderPersonalInfo() {
+            document.getElementById('app').innerHTML = `
+                <h1 class="text-3xl font-bold text-center text-indigo-900 mb-6">Test DISC</h1>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre completo *</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Escribe tu nombre">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Puesto</label>
+                        <input type="text" id="position" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Tu puesto de trabajo">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Departamento</label>
+                        <input type="text" id="department" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Tu departamento">
+                    </div>
+                    <button onclick="startTest()" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold">
+                        Comenzar Test
+                    </button>
+                </div>
+            `;
+        }
+
+        function startTest() {
+            personalInfo.name = document.getElementById('name').value;
+            personalInfo.position = document.getElementById('position').value;
+            personalInfo.department = document.getElementById('department').value;
+
+            if (!personalInfo.name) {
+                alert('Por favor ingresa tu nombre');
+                return;
+            }
+
+            currentStep = 'questions';
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const question = questions[currentQuestion];
+            const answer = answers[question.id] || {};
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+            let optionsHTML = '';
+            Object.entries(question.options).forEach(([key, text]) => {
+                const usedValues = Object.values(answer);
+                let buttonsHTML = '';
+                
+                for (let value = 1; value <= 4; value++) {
+                    const isSelected = answer[key] === value;
+                    const isUsed = usedValues.includes(value) && !isSelected;
+                    const btnClass = isSelected ? 'bg-indigo-600 text-white' : isUsed ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-100 text-gray-700 hover:bg-indigo-100';
+                    
+                    buttonsHTML += `<button onclick="selectAnswer(${question.id}, '${key}', ${value})" ${isUsed ? 'disabled' : ''} class="w-12 h-12 rounded-lg font-bold transition ${btnClass}">${value}</button>`;
+                }
+
+                optionsHTML += `
+                    <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 transition">
+                        <div class="flex flex-col md:flex-row md:items-center gap-4">
+                            <div class="flex-1">
+                                <p class="text-gray-700">${text}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                ${buttonsHTML}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const isComplete = isQuestionComplete(question.id);
+            const isLastQuestion = currentQuestion === questions.length - 1;
+
+            document.getElementById('app').innerHTML = `
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 class="text-sm font-semibold text-gray-500">Pregunta ${currentQuestion + 1} de ${questions.length}</h2>
+                        <span class="text-sm text-gray-500">${personalInfo.name}</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div>
+                    </div>
+                </div>
+
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">${question.text}</h2>
+
+                <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+                    <p class="text-sm text-indigo-900 font-semibold">Instrucciones:</p>
+                    <p class="text-sm text-gray-700">Asigna un valor del 1 al 4 a cada opción (sin repetir):</p>
+                    <p class="text-sm text-gray-700"><strong>4</strong> = La que más te describe | <strong>3</strong> = Segunda opción | <strong>2</strong> = Tercera opción | <strong>1</strong> = La que menos te describe</p>
+                </div>
+
+                <div class="space-y-4 mb-8">
+                    ${optionsHTML}
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''} class="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
+                        ← Anterior
+                    </button>
+                    
+                    ${isLastQuestion ? 
+                        `<button onclick="submitTest()" ${!isComplete ? 'disabled' : ''} class="flex-1 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed">Ver Resultados</button>` :
+                        `<button onclick="nextQuestion()" ${!isComplete ? 'disabled' : ''} class="flex-1 bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed">Siguiente →</button>`
+                    }
+                </div>
+
+                ${!isComplete ? '<p class="text-center text-sm text-amber-600 mt-4">⚠️ Debes asignar todos los valores (1, 2, 3 y 4) antes de continuar</p>' : ''}
+            `;
+        }
+
+        function selectAnswer(questionId, option, value) {
+            if (!answers[questionId]) {
+                answers[questionId] = {};
+            }
+            answers[questionId][option] = value;
+            renderQuestion();
+        }
+
+        function isQuestionComplete(questionId) {
+            const answer = answers[questionId];
+            if (!answer) return false;
+            
+            const values = Object.values(answer);
+            if (values.length !== 4) return false;
+            
+            const sorted = [...values].sort();
+            return JSON.stringify(sorted) === JSON.stringify([1, 2, 3, 4]);
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            }
+        }
+
+        async function submitTest() {
+            const allComplete = questions.every(q => isQuestionComplete(q.id));
+            if (!allComplete) {
+                alert('Por favor completa todas las preguntas');
+                return;
+            }
+
+            const results = calculateResults();
+            
+            // Enviar a Google Sheets
+            await sendToGoogleSheets(results);
+            
+            // Mostrar resultados
+            renderResults(results);
+        }
+
+        function calculateResults() {
+            const totals = { D: 0, I: 0, S: 0, C: 0 };
+            
+            Object.values(answers).forEach(answer => {
+                totals.D += answer.A || 0;
+                totals.I += answer.B || 0;
+                totals.S += answer.C || 0;
+                totals.C += answer.D || 0;
+            });
+
+            const maxScore = 26 * 4;
+            return {
+                D: ((totals.D / maxScore) * 100).toFixed(1),
+                I: ((totals.I / maxScore) * 100).toFixed(1),
+                S: ((totals.S / maxScore) * 100).toFixed(1),
+                C: ((totals.C / maxScore) * 100).toFixed(1)
+            };
+        }
+
+        async function sendToGoogleSheets(results) {
+            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'PEGA_AQUI_TU_URL_DE_GOOGLE_SCRIPT') {
+                console.warn('⚠️ URL de Google Script no configurada');
+                return;
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: personalInfo.name,
+                        position: personalInfo.position || 'N/A',
+                        department: personalInfo.department || 'N/A',
+                        results: results,
+                        answers: answers,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+
+                console.log('✅ Datos enviados a Google Sheets');
+            } catch (error) {
+                console.error('❌ Error al enviar:', error);
+            }
+        }
+
+        function renderResults(results) {
+            document.getElementById('app').innerHTML = `
+                <h1 class="text-3xl font-bold text-center text-indigo-900 mb-6">Resultados del Test DISC</h1>
+                
+                <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <p class="text-sm font-semibold text-green-800">✅ Datos guardados en Google Sheets correctamente</p>
+                </div>
+                
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-lg"><strong>Nombre:</strong> ${personalInfo.name}</p>
+                    ${personalInfo.position ? `<p class="text-lg"><strong>Puesto:</strong> ${personalInfo.position}</p>` : ''}
+                    ${personalInfo.department ? `<p class="text-lg"><strong>Departamento:</strong> ${personalInfo.department}</p>` : ''}
+                    <p class="text-sm text-gray-500 mt-2"><strong>Fecha:</strong> ${new Date().toLocaleDateString('es-MX')}</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-red-50 p-4 rounded-lg text-center border-2 border-red-200">
+                        <h3 class="text-xl font-bold text-red-700">D</h3>
+                        <p class="text-sm text-gray-600">Dominancia</p>
+                        <p class="text-3xl font-bold text-red-600 mt-2">${results.D}%</p>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-lg text-center border-2 border-amber-200">
+                        <h3 class="text-xl font-bold text-amber-700">I</h3>
+                        <p class="text-sm text-gray-600">Influencia</p>
+                        <p class="text-3xl font-bold text-amber-600 mt-2">${results.I}%</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg text-center border-2 border-green-200">
+                        <h3 class="text-xl font-bold text-green-700">S</h3>
+                        <p class="text-sm text-gray-600">Estabilidad</p>
+                        <p class="text-3xl font-bold text-green-600 mt-2">${results.S}%</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg text-center border-2 border-blue-200">
+                        <h3 class="text-xl font-bold text-blue-700">C</h3>
+                        <p class="text-sm text-gray-600">Cumplimiento</p>
+                        <p class="text-3xl font-bold text-blue-600 mt-2">${results.C}%</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-center">Perfil DISC</h3>
+                    <canvas id="chart" width="400" height="300"></canvas>
+                </div>
+
+                <div class="bg-indigo-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-900">Interpretación Rápida:</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong class="text-red-600">D (Dominancia):</strong> Orientado a resultados, directo, asertivo</li>
+                        <li><strong class="text-amber-600">I (Influencia):</strong> Sociable, optimista, persuasivo</li>
+                        <li><strong class="text-green-600">S (Estabilidad):</strong> Paciente, confiable, colaborador</li>
+                        <li><strong class="text-blue-600">C (Cumplimiento):</strong> Analítico, preciso, metódico</li>
+                    </ul>
+                </div>
+
+                <button onclick="location.reload()" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold">
+                    Realizar Nuevo Test
+                </button>
+            `;
+
+            // Crear gráfico
+            const ctx = document.getElementById('chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['D - Dominancia', 'I - Influencia', 'S - Estabilidad', 'C - Cumplimiento'],
+                    datasets: [{
+                        label: 'Porcentaje',
+                        data: [results.D, results.I, results.S, results.C],
+                        backgroundColor: ['#ef4444', '#f59e0b', '#10b981', '#3b82f6'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // Iniciar la aplicación
+        renderPersonalInfo();
+    </script>
+</body>
+</html>
