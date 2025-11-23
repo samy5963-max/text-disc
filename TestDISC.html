@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test DISC</title>
+    <title>Test DISC - Kaizen Strategies</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -34,7 +34,7 @@
     
     <!-- 🔧 CONFIGURA AQUÍ TU URL DE GOOGLE SHEETS -->
     <script>
-        const GOOGLE_SCRIPT_URL = ''https://script.google.com/macros/s/AKfycbyEmB0SURffeEz7Hl2R_sNSsaXa3ANs6-CW67pF_1Rv6QIts4--aenQmL2dmpIG47aGWg/exec ';
+        const GOOGLE_SCRIPT_URL = ' https://script.google.com/macros/s/AKfycbyEmB0SURffeEz7Hl2R_sNSsaXa3ANs6-CW67pF_1Rv6QIts4--aenQmL2dmpIG47aGWg/exec';
     </script>
 
     <div id="app" class="max-w-4xl mx-auto bg-white rounded-2xl card-shadow p-6 md:p-8">
@@ -313,7 +313,7 @@
         function renderPersonalInfo() {
             document.getElementById('app').innerHTML = `
                 <div class="text-center mb-8">
-                    <img src="https://imgur.com/a/gLszRRV" alt="Kaizen Strategies" class="mx-auto mb-6 h-32 object-contain">
+                    <img src=" https://imgur.com/a/gLszRRV " alt="Kaizen Strategies" class="mx-auto mb-6 h-32 object-contain">
                     <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-600 to-blue-800 bg-clip-text text-transparent mb-4">Test DISC</h1>
                     <p class="text-gray-600 text-lg">Evaluación de Personalidad</p>
                     <p class="text-sm text-red-600 font-semibold mt-2">"Tu crecimiento, nuestra estrategia"</p>
@@ -499,7 +499,7 @@
         }
 
         async function sendToGoogleSheets(results) {
-            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === ''https://script.google.com/macros/s/AKfycbyEmB0SURffeEz7Hl2R_sNSsaXa3ANs6-CW67pF_1Rv6QIts4--aenQmL2dmpIG47aGWg/exec ') {
+            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === ' https://script.google.com/macros/s/AKfycbyEmB0SURffeEz7Hl2R_sNSsaXa3ANs6-CW67pF_1Rv6QIts4--aenQmL2dmpIG47aGWg/exec') {
                 console.warn('⚠️ URL de Google Script no configurada');
                 return;
             }
@@ -573,7 +573,7 @@
                 </div>
 
                 <div class="bg-gradient-to-r from-red-50 via-purple-50 to-blue-50 p-8 rounded-xl mb-8 border-2 border-red-200 shadow-lg">
-<h3 class="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-red-600 to-blue-800 bg-clip-text text-transparent">Interpretación de Resultados</h3>
+                    <h3 class="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-red-600 to-blue-800 bg-clip-text text-transparent">Interpretación de Resultados</h3>
                     <div class="space-y-4">
                         <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-500">
                             <p class="font-bold text-red-700 text-lg mb-1">D - Dominancia (${results.D}%)</p>
