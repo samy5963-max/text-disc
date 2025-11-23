@@ -3,41 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test DISC - Kaizen Strategies</title>
+    <title>Test DISC</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
-        }
-        .btn-secondary {
-            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        }
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
-        }
-        .progress-bar {
-            background: linear-gradient(90deg, #dc2626 0%, #1e40af 100%);
-        }
-        .card-shadow {
-            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
-        }
-    </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-8">
     
     <!-- 🔧 CONFIGURA AQUÍ TU URL DE GOOGLE SHEETS -->
     <script>
-        const GOOGLE_SCRIPT_URL = ' https://script.google.com/macros/s/AKfycbyEmB0SURffeEz7Hl2R_sNSsaXa3ANs6-CW67pF_1Rv6QIts4--aenQmL2dmpIG47aGWg/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEmB0SURffeEz7Hl2R_sNSsaXa3ANs6-CW67pF_1Rv6QIts4--aenQmL2dmpIG47aGWg/exec';
     </script>
 
-    <div id="app" class="max-w-4xl mx-auto bg-white rounded-2xl card-shadow p-6 md:p-8">
+    <div id="app" class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8">
         <!-- El contenido se cargará aquí con JavaScript -->
     </div>
 
@@ -312,26 +289,21 @@
 
         function renderPersonalInfo() {
             document.getElementById('app').innerHTML = `
-                <div class="text-center mb-8">
-                    <img src=" https://imgur.com/a/gLszRRV " alt="Kaizen Strategies" class="mx-auto mb-6 h-32 object-contain">
-                    <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-600 to-blue-800 bg-clip-text text-transparent mb-4">Test DISC</h1>
-                    <p class="text-gray-600 text-lg">Evaluación de Personalidad</p>
-                    <p class="text-sm text-red-600 font-semibold mt-2">"Tu crecimiento, nuestra estrategia"</p>
-                </div>
-                <div class="space-y-6">
+                <h1 class="text-3xl font-bold text-center text-indigo-900 mb-6">Test DISC</h1>
+                <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre completo *</label>
-                        <input type="text" id="name" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition" placeholder="Escribe tu nombre">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre completo *</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Escribe tu nombre">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Puesto</label>
-                        <input type="text" id="position" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Tu puesto de trabajo">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Puesto</label>
+                        <input type="text" id="position" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Tu puesto de trabajo">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Departamento</label>
-                        <input type="text" id="department" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Tu departamento">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Departamento</label>
+                        <input type="text" id="department" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Tu departamento">
                     </div>
-                    <button onclick="startTest()" class="w-full btn-secondary text-white py-4 rounded-xl transition font-bold text-lg shadow-lg hover:shadow-xl">
+                    <button onclick="startTest()" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold">
                         Comenzar Test
                     </button>
                 </div>
@@ -365,18 +337,18 @@
                 for (let value = 1; value <= 4; value++) {
                     const isSelected = answer[key] === value;
                     const isUsed = usedValues.includes(value) && !isSelected;
-                    const btnClass = isSelected ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg scale-110' : isUsed ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-50 to-blue-100 text-blue-900 hover:from-blue-100 hover:to-blue-200 border-2 border-blue-200';
+                    const btnClass = isSelected ? 'bg-indigo-600 text-white' : isUsed ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-100 text-gray-700 hover:bg-indigo-100';
                     
-                    buttonsHTML += `<button onclick="selectAnswer(${question.id}, '${key}', ${value})" ${isUsed ? 'disabled' : ''} class="w-14 h-14 rounded-xl font-bold transition-all duration-200 ${btnClass}">${value}</button>`;
+                    buttonsHTML += `<button onclick="selectAnswer(${question.id}, '${key}', ${value})" ${isUsed ? 'disabled' : ''} class="w-12 h-12 rounded-lg font-bold transition ${btnClass}">${value}</button>`;
                 }
 
                 optionsHTML += `
-                    <div class="border-2 border-gray-200 rounded-xl p-5 hover:border-red-300 hover:shadow-md transition-all duration-200">
+                    <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 transition">
                         <div class="flex flex-col md:flex-row md:items-center gap-4">
                             <div class="flex-1">
-                                <p class="text-gray-700 leading-relaxed">${text}</p>
+                                <p class="text-gray-700">${text}</p>
                             </div>
-                            <div class="flex gap-2 justify-center">
+                            <div class="flex gap-2">
                                 ${buttonsHTML}
                             </div>
                         </div>
@@ -388,27 +360,22 @@
             const isLastQuestion = currentQuestion === questions.length - 1;
 
             document.getElementById('app').innerHTML = `
-                <div class="mb-8">
-                    <div class="flex justify-between items-center mb-3">
-                        <h2 class="text-sm font-bold text-gray-600">Pregunta ${currentQuestion + 1} de ${questions.length}</h2>
-                        <span class="text-sm font-semibold text-red-600">${personalInfo.name}</span>
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 class="text-sm font-semibold text-gray-500">Pregunta ${currentQuestion + 1} de ${questions.length}</h2>
+                        <span class="text-sm text-gray-500">${personalInfo.name}</span>
                     </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3 shadow-inner">
-                        <div class="progress-bar h-3 rounded-full transition-all duration-500 shadow-lg" style="width: ${progress}%"></div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div>
                     </div>
                 </div>
 
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 leading-tight">${question.text}</h2>
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">${question.text}</h2>
 
-                <div class="bg-gradient-to-r from-red-50 to-blue-50 border-2 border-red-200 p-5 rounded-xl mb-8">
-                    <p class="text-sm font-bold text-gray-800 mb-2">📋 Instrucciones:</p>
-                    <p class="text-sm text-gray-700 mb-1">Asigna un valor del <strong class="text-red-600">1 al 4</strong> a cada opción (sin repetir):</p>
-                    <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
-                        <div class="bg-white p-2 rounded-lg"><strong class="text-red-600">4</strong> = La que más te describe</div>
-                        <div class="bg-white p-2 rounded-lg"><strong class="text-blue-600">3</strong> = Segunda opción</div>
-                        <div class="bg-white p-2 rounded-lg"><strong class="text-blue-600">2</strong> = Tercera opción</div>
-                        <div class="bg-white p-2 rounded-lg"><strong class="text-gray-600">1</strong> = La que menos te describe</div>
-                    </div>
+                <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+                    <p class="text-sm text-indigo-900 font-semibold">Instrucciones:</p>
+                    <p class="text-sm text-gray-700">Asigna un valor del 1 al 4 a cada opción (sin repetir):</p>
+                    <p class="text-sm text-gray-700"><strong>4</strong> = La que más te describe | <strong>3</strong> = Segunda opción | <strong>2</strong> = Tercera opción | <strong>1</strong> = La que menos te describe</p>
                 </div>
 
                 <div class="space-y-4 mb-8">
@@ -416,17 +383,17 @@
                 </div>
 
                 <div class="flex gap-4">
-                    <button onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''} class="flex-1 bg-gray-300 text-gray-700 py-4 rounded-xl hover:bg-gray-400 transition font-bold disabled:opacity-50 disabled:cursor-not-allowed shadow-md">
+                    <button onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''} class="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
                         ← Anterior
                     </button>
                     
                     ${isLastQuestion ? 
-                        `<button onclick="submitTest()" ${!isComplete ? 'disabled' : ''} class="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition font-bold disabled:opacity-50 disabled:cursor-not-allowed shadow-lg">✓ Ver Resultados</button>` :
-                        `<button onclick="nextQuestion()" ${!isComplete ? 'disabled' : ''} class="flex-1 btn-secondary text-white py-4 rounded-xl transition font-bold disabled:opacity-50 disabled:cursor-not-allowed shadow-lg">Siguiente →</button>`
+                        `<button onclick="submitTest()" ${!isComplete ? 'disabled' : ''} class="flex-1 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed">Ver Resultados</button>` :
+                        `<button onclick="nextQuestion()" ${!isComplete ? 'disabled' : ''} class="flex-1 bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed">Siguiente →</button>`
                     }
                 </div>
 
-                ${!isComplete ? '<p class="text-center text-sm text-red-600 font-semibold mt-4 animate-pulse">⚠️ Debes asignar todos los valores (1, 2, 3 y 4) antes de continuar</p>' : ''}
+                ${!isComplete ? '<p class="text-center text-sm text-amber-600 mt-4">⚠️ Debes asignar todos los valores (1, 2, 3 y 4) antes de continuar</p>' : ''}
             `;
         }
 
@@ -499,7 +466,7 @@
         }
 
         async function sendToGoogleSheets(results) {
-            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === ' https://script.google.com/macros/s/AKfycbyEmB0SURffeEz7Hl2R_sNSsaXa3ANs6-CW67pF_1Rv6QIts4--aenQmL2dmpIG47aGWg/exec') {
+            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'PEGA_AQUI_TU_URL_DE_GOOGLE_SCRIPT') {
                 console.warn('⚠️ URL de Google Script no configurada');
                 return;
             }
@@ -529,73 +496,59 @@
 
         function renderResults(results) {
             document.getElementById('app').innerHTML = `
-                <div class="text-center mb-8">
-                    <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-600 to-blue-800 bg-clip-text text-transparent mb-4">Resultados Test DISC</h1>
+                <h1 class="text-3xl font-bold text-center text-indigo-900 mb-6">Resultados del Test DISC</h1>
+                
+                <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <p class="text-sm font-semibold text-green-800">✅ Datos guardados en Google Sheets correctamente</p>
                 </div>
                 
-                <div class="mb-6 p-5 bg-gradient-to-r from-green-50 to-green-100 border-2 border-green-300 rounded-xl shadow-md">
-                    <p class="text-sm font-bold text-green-800">✅ Datos guardados en Google Sheets correctamente</p>
-                </div>
-                
-                <div class="mb-8 p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border-2 border-gray-200">
-                    <p class="text-lg mb-2"><strong class="text-red-600">Nombre:</strong> ${personalInfo.name}</p>
-                    ${personalInfo.position ? `<p class="text-lg mb-2"><strong class="text-blue-600">Puesto:</strong> ${personalInfo.position}</p>` : ''}
-                    ${personalInfo.department ? `<p class="text-lg mb-2"><strong class="text-blue-600">Departamento:</strong> ${personalInfo.department}</p>` : ''}
-                    <p class="text-sm text-gray-600 mt-3"><strong>Fecha:</strong> ${new Date().toLocaleDateString('es-MX')}</p>
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-lg"><strong>Nombre:</strong> ${personalInfo.name}</p>
+                    ${personalInfo.position ? `<p class="text-lg"><strong>Puesto:</strong> ${personalInfo.position}</p>` : ''}
+                    ${personalInfo.department ? `<p class="text-lg"><strong>Departamento:</strong> ${personalInfo.department}</p>` : ''}
+                    <p class="text-sm text-gray-500 mt-2"><strong>Fecha:</strong> ${new Date().toLocaleDateString('es-MX')}</p>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl text-center border-2 border-red-300 shadow-lg transform hover:scale-105 transition">
-                        <h3 class="text-2xl font-bold text-red-700">D</h3>
-                        <p class="text-xs text-gray-600 mb-2">Dominancia</p>
-                        <p class="text-4xl font-bold text-red-600 mt-2">${results.D}%</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-red-50 p-4 rounded-lg text-center border-2 border-red-200">
+                        <h3 class="text-xl font-bold text-red-700">D</h3>
+                        <p class="text-sm text-gray-600">Dominancia</p>
+                        <p class="text-3xl font-bold text-red-600 mt-2">${results.D}%</p>
                     </div>
-                    <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl text-center border-2 border-amber-300 shadow-lg transform hover:scale-105 transition">
-                        <h3 class="text-2xl font-bold text-amber-700">I</h3>
-                        <p class="text-xs text-gray-600 mb-2">Influencia</p>
-                        <p class="text-4xl font-bold text-amber-600 mt-2">${results.I}%</p>
+                    <div class="bg-amber-50 p-4 rounded-lg text-center border-2 border-amber-200">
+                        <h3 class="text-xl font-bold text-amber-700">I</h3>
+                        <p class="text-sm text-gray-600">Influencia</p>
+                        <p class="text-3xl font-bold text-amber-600 mt-2">${results.I}%</p>
                     </div>
-                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl text-center border-2 border-green-300 shadow-lg transform hover:scale-105 transition">
-                        <h3 class="text-2xl font-bold text-green-700">S</h3>
-                        <p class="text-xs text-gray-600 mb-2">Estabilidad</p>
-                        <p class="text-4xl font-bold text-green-600 mt-2">${results.S}%</p>
+                    <div class="bg-green-50 p-4 rounded-lg text-center border-2 border-green-200">
+                        <h3 class="text-xl font-bold text-green-700">S</h3>
+                        <p class="text-sm text-gray-600">Estabilidad</p>
+                        <p class="text-3xl font-bold text-green-600 mt-2">${results.S}%</p>
                     </div>
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl text-center border-2 border-blue-300 shadow-lg transform hover:scale-105 transition">
-                        <h3 class="text-2xl font-bold text-blue-700">C</h3>
-                        <p class="text-xs text-gray-600 mb-2">Cumplimiento</p>
-                        <p class="text-4xl font-bold text-blue-600 mt-2">${results.C}%</p>
+                    <div class="bg-blue-50 p-4 rounded-lg text-center border-2 border-blue-200">
+                        <h3 class="text-xl font-bold text-blue-700">C</h3>
+                        <p class="text-sm text-gray-600">Cumplimiento</p>
+                        <p class="text-3xl font-bold text-blue-600 mt-2">${results.C}%</p>
                     </div>
                 </div>
 
-                <div class="mb-10 p-6 bg-white rounded-xl shadow-lg border-2 border-gray-200">
-                    <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-red-600 to-blue-800 bg-clip-text text-transparent">Perfil DISC</h3>
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-center">Perfil DISC</h3>
                     <canvas id="chart" width="400" height="300"></canvas>
                 </div>
 
-                <div class="bg-gradient-to-r from-red-50 via-purple-50 to-blue-50 p-8 rounded-xl mb-8 border-2 border-red-200 shadow-lg">
-                    <h3 class="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-red-600 to-blue-800 bg-clip-text text-transparent">Interpretación de Resultados</h3>
-                    <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-500">
-                            <p class="font-bold text-red-700 text-lg mb-1">D - Dominancia (${results.D}%)</p>
-                            <p class="text-gray-700 text-sm">Orientado a resultados, directo, asertivo, le gustan los desafíos y tomar decisiones rápidas.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-amber-500">
-                            <p class="font-bold text-amber-700 text-lg mb-1">I - Influencia (${results.I}%)</p>
-                            <p class="text-gray-700 text-sm">Sociable, optimista, persuasivo, entusiasta y le gusta trabajar en equipo.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
-                            <p class="font-bold text-green-700 text-lg mb-1">S - Estabilidad (${results.S}%)</p>
-                            <p class="text-gray-700 text-sm">Paciente, confiable, colaborador, leal y busca la armonía en el ambiente.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-                            <p class="font-bold text-blue-700 text-lg mb-1">C - Cumplimiento (${results.C}%)</p>
-                            <p class="text-gray-700 text-sm">Analítico, preciso, metódico, orientado a la calidad y atento a los detalles.</p>
-                        </div>
-                    </div>
+                <div class="bg-indigo-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-900">Interpretación Rápida:</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong class="text-red-600">D (Dominancia):</strong> Orientado a resultados, directo, asertivo</li>
+                        <li><strong class="text-amber-600">I (Influencia):</strong> Sociable, optimista, persuasivo</li>
+                        <li><strong class="text-green-600">S (Estabilidad):</strong> Paciente, confiable, colaborador</li>
+                        <li><strong class="text-blue-600">C (Cumplimiento):</strong> Analítico, preciso, metódico</li>
+                    </ul>
                 </div>
 
-                <button onclick="location.reload()" class="w-full btn-primary text-white py-4 rounded-xl transition font-bold text-lg shadow-lg hover:shadow-xl">
-                    🔄 Realizar Nuevo Test
+                <button onclick="location.reload()" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold">
+                    Realizar Nuevo Test
                 </button>
             `;
 
@@ -608,37 +561,15 @@
                     datasets: [{
                         label: 'Porcentaje',
                         data: [results.D, results.I, results.S, results.C],
-                        backgroundColor: [
-                            'rgba(220, 38, 38, 0.8)',
-                            'rgba(245, 158, 11, 0.8)',
-                            'rgba(16, 185, 129, 0.8)',
-                            'rgba(30, 64, 175, 0.8)'
-                        ],
-                        borderColor: [
-                            'rgb(220, 38, 38)',
-                            'rgb(245, 158, 11)',
-                            'rgb(16, 185, 129)',
-                            'rgb(30, 64, 175)'
-                        ],
-                        borderWidth: 2
+                        backgroundColor: ['#ef4444', '#f59e0b', '#10b981', '#3b82f6'],
                     }]
                 },
                 options: {
                     responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%';
-                                }
-                            }
+                            max: 100
                         }
                     }
                 }
